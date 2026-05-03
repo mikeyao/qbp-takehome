@@ -2,6 +2,8 @@
 
 See [DECISIONS.md](./DECISIONS.md) for a record of every significant architectural decision made during this exercise — the approach chosen, the reasoning, and the alternatives considered. It covers state management, form design, delete UX, filtering, search, and the testing stack.
 
+This solution was implemented with the assistance of Claude Code (Anthropic's AI coding assistant), in line with the ground rules permitting coding assistants. All architectural decisions, trade-off discussions, and code reviews were done collaboratively — every line is understood and owned.
+
 
 # Quicken — Transactions Take-Home
 
