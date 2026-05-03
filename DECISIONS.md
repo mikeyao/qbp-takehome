@@ -1,5 +1,20 @@
 # Architecture Decisions
 
+## Testing: Vitest + React Testing Library
+
+**Decision:** Vitest for the test runner; React Testing Library + jsdom for component tests.
+
+**Reasoning:**
+
+- Vitest is the natural fit for a Vite project — shares the same transform pipeline and config, zero extra bridging needed.
+- RTL tests interact with components the way a user would (by role, label, text) rather than testing implementation details like internal state or class names.
+- A shared `renderWithStore` helper gives each test a clean, isolated Redux store.
+
+**Alternatives considered:**
+
+- Jest — more widely known but requires extra ESM/Vite bridging (`babel-jest`, `ts-jest`) that Vitest eliminates.
+- Enzyme — tests implementation details; RTL's user-centric approach better reflects real usage.
+
 ## Step 1 — State management: Redux Toolkit
 
 **Decision:** Use Redux Toolkit with two slices (`transactionsSlice`, `filtersSlice`) rather than local component state or a lighter alternative.
