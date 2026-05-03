@@ -1,8 +1,9 @@
 import { DayGroup } from './components/DayGroup'
-import { transactions } from './data/transactions'
+import { useAppSelector } from './store/hooks'
 import { groupByDay } from './utils/transactions'
 
 export default function App() {
+  const transactions = useAppSelector((state) => state.transactions.items)
   const grouped = groupByDay(transactions)
 
   return (
