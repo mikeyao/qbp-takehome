@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { AddTransactionForm } from './components/AddTransactionForm'
 import { CategoryFilter } from './components/CategoryFilter'
+import { SearchInput } from './components/SearchInput'
 import { DayGroup } from './components/DayGroup'
 import { useAppDispatch, useAppSelector } from './store/hooks'
 import { selectFilteredTransactions } from './store/selectors'
@@ -30,6 +31,7 @@ export default function App() {
           </button>
         </div>
         <div className="app-toolbar">
+          <SearchInput />
           <CategoryFilter />
         </div>
         {showForm && <AddTransactionForm onClose={() => setShowForm(false)} />}
