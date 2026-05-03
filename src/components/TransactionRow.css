@@ -1,0 +1,117 @@
+.transaction-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-top: 1px solid var(--color-border);
+}
+
+.transaction-row:first-child {
+  border-top: none;
+}
+
+.transaction-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.transaction-merchant {
+  font-size: 15px;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.transaction-category {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.transaction-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.transaction-amount {
+  font-size: 15px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.amount-credit {
+  color: var(--color-credit);
+}
+
+.amount-debit {
+  color: var(--color-debit);
+}
+
+.delete-btn {
+  opacity: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-muted);
+  padding: 8px;
+  border-radius: 6px;
+  line-height: 0;
+  min-width: 36px;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 0.15s,
+    color 0.15s,
+    background 0.15s;
+}
+
+.transaction-row:hover .delete-btn {
+  opacity: 1;
+}
+
+.delete-btn:hover {
+  color: var(--color-danger);
+  background: var(--color-danger-bg);
+}
+
+.delete-confirm {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.delete-confirm-label {
+  font-size: 13px;
+  color: var(--color-muted);
+}
+
+.delete-confirm-btn {
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+  background: transparent;
+}
+
+.delete-confirm-btn--yes {
+  color: var(--color-danger);
+  border-color: var(--color-danger);
+}
+
+.delete-confirm-btn--yes:hover {
+  background: var(--color-danger);
+  color: #fff;
+}
+
+.delete-confirm-btn--no:hover {
+  background: var(--color-bg);
+}

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './AddTransactionForm.css'
 import { useAppDispatch } from '../store/hooks'
 import { addTransaction } from '../store/transactionsSlice'
 import { TRANSACTION_CATEGORIES, type TransactionCategory } from '../types'

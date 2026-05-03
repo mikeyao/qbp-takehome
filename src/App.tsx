@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { AddTransactionForm } from './components/AddTransactionForm'
 import { DayGroup } from './components/DayGroup'
-import { useAppSelector } from './store/hooks'
+import { useAppDispatch, useAppSelector } from './store/hooks'
+import { deleteTransaction } from './store/transactionsSlice'
 import { groupByDay } from './utils/transactions'
 
 export default function App() {
+  const dispatch = useAppDispatch()
   const transactions = useAppSelector((state) => state.transactions.items)
   const grouped = groupByDay(transactions)
   const [showForm, setShowForm] = useState(false)
@@ -29,7 +31,12 @@ export default function App() {
       </header>
       <main className="app-main">
         {grouped.map(({ date, transactions: dayTransactions }) => (
-          <DayGroup key={date} date={date} transactions={dayTransactions} />
+          <DayGroup
+            key={date}
+            date={date}
+            transactions={dayTransactions}
+            onDelete={(id) => dispatch(deleteTransaction(id))}
+          />
         ))}
       </main>
     </div>

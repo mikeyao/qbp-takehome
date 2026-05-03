@@ -31,3 +31,17 @@
 - Uncontrolled form with `FormData` — less re-render overhead, but per-field inline errors are awkward to wire without controlled state.
 - Form state in Redux — unnecessary for ephemeral UI state that no other component needs.
 - Plain signed number input — leaks an internal data convention to the user; error-prone.
+
+## Step 3 — Delete transaction: inline row confirmation
+
+**Decision:** A ✕ button appears on row hover; clicking reveals an inline "Delete? Yes / No" prompt within the same row rather than a modal or toast.
+
+**Reasoning:**
+
+- Two-step prevents accidental deletes without interrupting page flow.
+- The `confirming` state is local to `TransactionRow` — no other component needs to know about it, so it doesn't belong in Redux.
+
+**Alternatives considered:**
+
+- Undo toast — better perceived UX but requires a timer, temporary state for the deleted item, and a toast component; disproportionate complexity for this scope.
+- Confirmation modal — explicit but heavy for a single-row action with no UI library.
