@@ -1,3 +1,8 @@
+# Notes for the reviewer
+
+See [DECISIONS.md](./DECISIONS.md) for a record of every significant architectural decision made during this exercise — the approach chosen, the reasoning, and the alternatives considered. It covers state management, form design, delete UX, filtering, search, and the testing stack.
+
+
 # Quicken — Transactions Take-Home
 
 Thanks for taking the time. This is a small React + TypeScript app that renders a list of mock transactions grouped by day. Your job is to add a few features and send it back.
