@@ -1,10 +1,26 @@
+import { useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { setSearch } from '../store/filtersSlice'
 import './SearchInput.css'
 
+const DEBOUNCE_MS = 300
+
 export function SearchInput() {
   const dispatch = useAppDispatch()
   const search = useAppSelector((state) => state.filters.search)
+  const [inputValue, setInputValue] = useState(search)
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      dispatch(setSearch(inputValue))
+    }, DEBOUNCE_MS)
+    return () => clearTimeout(timer)
+  }, [inputValue, dispatch])
+
+  function handleClear() {
+    setInputValue('')
+    dispatch(setSearch(''))
+  }
 
   return (
     <div className="search-input-wrapper">
@@ -28,16 +44,12 @@ export function SearchInput() {
         className="search-input"
         type="search"
         placeholder="Search merchant…"
-        value={search}
-        onChange={(e) => dispatch(setSearch(e.target.value))}
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
         aria-label="Search transactions by merchant"
       />
-      {search && (
-        <button
-          className="search-clear"
-          onClick={() => dispatch(setSearch(''))}
-          aria-label="Clear search"
-        >
+      {inputValue && (
+        <button className="search-clear" onClick={handleClear} aria-label="Clear search">
           ×
         </button>
       )}
