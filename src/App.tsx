@@ -1,13 +1,15 @@
 import { useState } from 'react'
 import { AddTransactionForm } from './components/AddTransactionForm'
+import { CategoryFilter } from './components/CategoryFilter'
 import { DayGroup } from './components/DayGroup'
 import { useAppDispatch, useAppSelector } from './store/hooks'
+import { selectFilteredTransactions } from './store/selectors'
 import { deleteTransaction } from './store/transactionsSlice'
 import { groupByDay } from './utils/transactions'
 
 export default function App() {
   const dispatch = useAppDispatch()
-  const transactions = useAppSelector((state) => state.transactions.items)
+  const transactions = useAppSelector(selectFilteredTransactions)
   const grouped = groupByDay(transactions)
   const [showForm, setShowForm] = useState(false)
 
@@ -26,6 +28,9 @@ export default function App() {
           >
             {showForm ? 'Cancel' : '+ Add'}
           </button>
+        </div>
+        <div className="app-toolbar">
+          <CategoryFilter />
         </div>
         {showForm && <AddTransactionForm onClose={() => setShowForm(false)} />}
       </header>

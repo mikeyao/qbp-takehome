@@ -32,6 +32,23 @@
 - Form state in Redux — unnecessary for ephemeral UI state that no other component needs.
 - Plain signed number input — leaks an internal data convention to the user; error-prone.
 
+## Step 4 — Filter by category: memoized selector + checkbox dropdown
+
+**Decision:** Filter logic lives in `selectFilteredTransactions` (`store/selectors.ts`) using `createSelector`. The UI is a custom checkbox dropdown in `CategoryFilter.tsx`.
+
+**Reasoning:**
+
+- `createSelector` is idiomatic Redux — it memoizes the filtered result and only recomputes when `transactions.items` or `filters.categories` change, keeping `App.tsx` to a single selector call with no inline logic.
+- Checkbox dropdown is the standard multi-select filtering pattern — clear state, compact, works well for 10 items.
+
+**Alternatives considered:**
+
+- Plain util function called in `App.tsx` — simpler but re-runs on every render and isn't idiomatic Redux.
+- Always-visible filter pills — no dropdown needed, but 10 chips takes significant vertical space.
+- Native `<select multiple>` — requires Ctrl+click to multi-select; inconsistent with the app's UI.
+
+**Filter tag enhancement:** Selected categories render as removable pill tags inline after the dropdown. "Clear all" appears only when 2+ categories are selected — with a single tag, clicking its × is already a "clear all" equivalent, making a second button redundant.
+
 ## Step 3 — Delete transaction: inline row confirmation
 
 **Decision:** A ✕ button appears on row hover; clicking reveals an inline "Delete? Yes / No" prompt within the same row rather than a modal or toast.
